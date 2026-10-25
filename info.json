@@ -1,0 +1,9 @@
+{
+  "name": "learning",
+  "version": "0.0.508",
+  "title": "Учебный мод: супер-печь",
+  "author": "slavyy",
+  "factorio_version": "2.1",
+  "dependencies": ["base >= 2.0.0"],
+  "description": "Добавляет супер-уголь, супер-печь и экспериментальные команды."
+}

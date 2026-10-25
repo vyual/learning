@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "justarandomgeek.factoriomod-debug",
+    "sumneko.lua"
+  ],
+  "unwantedRecommendations": [
+    "svizzini.factorio-lua-api-autocomplete"
+  ]
+}
