@@ -12,6 +12,15 @@ script.on_event(defines.events.on_configuration_changed, function(event)
                 storage.free_refills = storage.free_refills or 0 -- инициализируем счетчик бесплатных заправок, если его нет
                 storage.scanner_enabled = storage.scanner_enabled or false -- инициализируем флаг сканера, если его нет
                 
+                -- миграция данных рабочих, если у них нет таблицы предметов
+                for _, worker in pairs(storage.workers) do
+                    if worker.items == nil then
+                        worker.items = {
+                            super_coal = 0,
+                            drill = 0,
+                        }
+                    end
+                end
             end
         end
     end
