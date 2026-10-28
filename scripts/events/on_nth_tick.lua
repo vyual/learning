@@ -21,7 +21,9 @@ script.on_nth_tick(60, function(event)
                     entity.name .. " на позиции (" .. entity.position.x .. ", " .. entity.position.y .. ")")
                     player.print("⚠️ Внимание: найден ресурс " .. entity.name .. "!")
                     storage.scanner_enabled = false
-                    storage.nearest_resource = {position = {x = entity.position.x, y = entity.position.y}, name = entity.name}
+                    local resource_key = entity.position.x .. ":" .. entity.position.y
+
+                    storage.reservations[resource_key] = {position = {x = entity.position.x, y = entity.position.y}, name = entity.name, worker = nil}
                     break     -- останавливаем дальнейшее сканирование после нахождения первого ресурса`
                 end
             end

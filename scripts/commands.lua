@@ -88,7 +88,7 @@ commands.add_command("remove-workers", "Удаляет всех заспавне
 end)
 
 commands.add_command("send-worker", "Отправляет рабочего к ближайшему ресурсу", function(command)
-    if not storage.nearest_resource then
+    if not storage.reservations or next(storage.reservations) == nil then
         game.print("Нет информации о ближайшем ресурсе. Пожалуйста, сначала используйте сканер.")
         return
     end
@@ -98,7 +98,17 @@ commands.add_command("send-worker", "Отправляет рабочего к б
         return
     end
 
-    local nearest_resource = storage.nearest_resource
+    local nearest_resource = nil
+    for _, reservation in pairs(storage.reservations) do
+        if not reservation.worker then
+            nearest_resource = reservation
+            break
+        end
+    end
+    if not nearest_resource then
+        game.print("Нет свободных ресурсов для отправки рабочего.")
+        return
+    end
     local resource_position = nearest_resource.position
 
     for _, worker_data in pairs(storage.workers) do
@@ -111,6 +121,9 @@ commands.add_command("send-worker", "Отправляет рабочего к б
                 distraction = defines.distraction.none
             })
             worker_data.task = "moving" -- обновляем статус рабочего на "moving"
+            nearest_resource.worker = worker_data
+            storage.reservations[nearest_resource.resource_key] = nearest_resource
+
             game.print("Рабочий отправлен к ресурсу: " ..
                 nearest_resource.name .. " на позиции (" .. resource_position.x .. ", " .. resource_position.y .. ").")
             break -- отправляем только одного рабочего к ресурсу, если нужно отправить всех, уберите break

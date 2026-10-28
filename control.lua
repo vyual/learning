@@ -1,6 +1,7 @@
 script.on_init(function()
     storage.free_refills = 3
     storage.scanner_enabled = false
+    storage.reservations = {}
 end)
 
 require("scripts.commands")
