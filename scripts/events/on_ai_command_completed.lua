@@ -22,18 +22,35 @@ script.on_event(defines.events.on_ai_command_completed, function(event)
             position = worker.position,
             force = worker.force
         })
+        if drill == nil then
+            game.print(
+                "Не удалось создать буровую установку на позиции (" ..
+                worker.position.x .. ", " .. worker.position.y .. ").",
+                { r = 1, g = 0, b = 0 }
+            )
+            worker_data.task = "idle"
+            worker_data.items.drills = drills + 1
+            return
+        end
         local drill_inventory = drill.get_inventory(defines.inventory.fuel)
         worker_data.items.super_coal = super_coal - 5
         drill_inventory.insert({ name = "super-coal", count = 5 })
         worker_data.task = "idle"
+        for _, resource_data in pairs(storage.reservations) do
+            if resource_data.worker == worker_data then
+                resource_data.worker = nil
+            end
+        end
     else
         if player and player.valid then
             if drills <= 0 and super_coal < 5 then
-                player.print("⚠️ Внимание: у юнита " .. worker.name .. " нет буровой установки и недостаточно супер-угля для работы.")
+                player.print("⚠️ Внимание: у юнита " ..
+                    worker.name .. " нет буровой установки и недостаточно супер-угля для работы.")
             elseif drills <= 0 then
                 player.print("⚠️ Внимание: у юнита " .. worker.name .. " нет буровой установки для добычи ресурсов.")
             elseif super_coal < 5 then
-                player.print("⚠️ Внимание: у юнита " .. worker.name .. " недостаточно супер-угля для работы буровой установки.")
+                player.print("⚠️ Внимание: у юнита " ..
+                    worker.name .. " недостаточно супер-угля для работы буровой установки.")
             end
         end
     end

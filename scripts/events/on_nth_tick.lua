@@ -22,8 +22,10 @@ script.on_nth_tick(60, function(event)
                     player.print("⚠️ Внимание: найден ресурс " .. entity.name .. "!")
                     storage.scanner_enabled = false
                     local resource_key = entity.position.x .. ":" .. entity.position.y
-
-                    storage.reservations[resource_key] = {position = {x = entity.position.x, y = entity.position.y}, name = entity.name, worker = nil}
+                    
+                    if storage.reservations[resource_key] == nil then
+                        storage.reservations[resource_key] = {position = {x = entity.position.x, y = entity.position.y}, name = entity.name, worker = nil}
+                    end
                 end
             end
         end
