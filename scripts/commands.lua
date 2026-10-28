@@ -122,7 +122,6 @@ commands.add_command("send-worker", "Отправляет рабочего к б
             })
             worker_data.task = "moving" -- обновляем статус рабочего на "moving"
             nearest_resource.worker = worker_data
-            storage.reservations[nearest_resource.resource_key] = nearest_resource
 
             game.print("Рабочий отправлен к ресурсу: " ..
                 nearest_resource.name .. " на позиции (" .. resource_position.x .. ", " .. resource_position.y .. ").")

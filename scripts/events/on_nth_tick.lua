@@ -24,7 +24,6 @@ script.on_nth_tick(60, function(event)
                     local resource_key = entity.position.x .. ":" .. entity.position.y
 
                     storage.reservations[resource_key] = {position = {x = entity.position.x, y = entity.position.y}, name = entity.name, worker = nil}
-                    break     -- останавливаем дальнейшее сканирование после нахождения первого ресурса`
                 end
             end
         end
