@@ -14,6 +14,7 @@ $scriptNames = @(
   "deploy-mod-on-save.ps1",
   "update-mod.ps1",
   "bump-version.ps1",
+  "check-install.ps1",
   ".luarc.json"
 )
 

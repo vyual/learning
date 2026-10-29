@@ -1,5 +1,9 @@
 require("prototypes.super-coal")
 require("prototypes.super-furnace")
+require("prototypes.corporate-hq")
+require("prototypes.corporate-project-tool")
+require("prototypes.corporate-district-tool")
+require("prototypes.corporate-residential")
 
 
 local recipes_steel_processing = { "super-coal", "super-furnace" }

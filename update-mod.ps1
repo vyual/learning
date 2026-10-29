@@ -14,7 +14,8 @@ $excludedNames = @(
     "LICENSE.md",
     "CHANGELOG.md",
     "deploy-mod-on-save.ps1",
-    "bump-version.ps1"
+    "bump-version.ps1",
+    "check-install.ps1"
 )
 
 if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {

@@ -1,4 +1,7 @@
+local corporations = require("scripts.corporations")
+
 script.on_configuration_changed(function(event)
+    corporations.initialize()
     -- Обработка изменений конфигурации мода
     if event.mod_changes then
         for mod_name, changes in pairs(event.mod_changes) do
